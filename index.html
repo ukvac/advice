@@ -3,183 +3,1260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AVI Immigration Advice Logic AI</title>
+  <title>Talk Visa Immigration Advice AI</title>
   <style>
     :root{
-      --navy:#111820; --navy2:#20272d; --blue:#0798d8; --blue2:#0073b1; --ink:#1f2933; --muted:#5f6b76;
-      --line:#d8e0e7; --soft:#f5f9fc; --green:#00703c; --amber:#f59e0b; --red:#b42318; --white:#fff;
-      --shadow:0 12px 30px rgba(17,24,32,.10); --radius:14px;
+      --black:#0b0c0c;
+      --blue:#1d70b8;
+      --blue-dark:#003078;
+      --green:#00703c;
+      --red:#d4351c;
+      --orange:#f47738;
+      --yellow:#ffdd00;
+      --grey-1:#f3f2f1;
+      --grey-2:#b1b4b6;
+      --grey-3:#505a5f;
+      --white:#ffffff;
+      --border:#b1b4b6;
+      --max:1060px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;font-size:17px;line-height:1.45}
-    .top{background:var(--navy);color:#fff}.wrap{width:min(1100px,calc(100% - 32px));margin:auto}
-    .top-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}.logo{border:2px solid var(--blue);padding:12px 16px;font-size:24px;line-height:1.05;font-weight:800;letter-spacing:.5px}.logo small{display:block;color:var(--blue);font-size:12px;margin-top:9px;letter-spacing:1px}.phone{font-size:22px}.nav{background:var(--navy2);color:#fff}.nav-inner{display:flex;gap:28px;padding:13px 0;font-size:14px;text-transform:uppercase}.nav-inner span.active{color:var(--blue)}
-    .hero{background:linear-gradient(90deg,rgba(17,24,32,.93),rgba(17,24,32,.64)),url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1800&q=80') center/cover;color:#fff}.hero-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:34px;align-items:center;min-height:360px;padding:46px 0}.eyebrow{color:var(--blue);font-weight:800;text-transform:uppercase;letter-spacing:.7px}.hero h1{font-size:clamp(38px,5vw,58px);line-height:1.02;margin:14px 0 16px;text-transform:uppercase}.hero p{max-width:640px;font-size:18px}.hero-card{background:rgba(17,24,32,.82);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}.hero-card div{border-bottom:1px solid rgba(255,255,255,.14);padding:14px 0}.hero-card div:last-child{border-bottom:0}.hero-card strong{display:block;color:#fff}.hero-card span{color:#d8e0e7;font-size:14px}
-    .btn{border:0;border-radius:3px;background:var(--blue);color:#fff;font-weight:800;font-size:15px;padding:13px 20px;cursor:pointer;text-transform:uppercase;letter-spacing:.2px}.btn:hover{background:var(--blue2)}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.dark{background:var(--navy)}
-    main{background:linear-gradient(180deg,#fff,#f8fbfe);padding:28px 0 62px}.notice{background:#eef8ff;border-left:5px solid var(--blue);padding:16px 18px;margin:0 0 26px;border-radius:8px}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:28px 0}.step{text-align:center;color:var(--muted);font-size:13px}.bubble{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;margin:0 auto 8px;background:#fff}.step.active .bubble{background:var(--blue);color:#fff;border-color:var(--blue)}.step.active{color:var(--blue);font-weight:800}
-    .layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px}.panel,.side,.scenario,.result,.risk{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}.section-title{display:flex;gap:12px;align-items:center;color:var(--blue);font-size:14px;font-weight:800;text-transform:uppercase}.icon{width:30px;height:30px;border-radius:50%;background:#e5f5ff;display:grid;place-items:center;color:var(--blue);font-weight:800}.progressbar{height:5px;background:#e6edf3;border-radius:20px;overflow:hidden;margin:14px 0 18px}.progressbar span{display:block;height:100%;background:var(--blue);width:0}.side h3{margin-top:0}.checkrow{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:9px 0;font-size:14px}.checkrow.done{color:var(--green);font-weight:700}
-    label,legend{font-size:22px;font-weight:800;display:block;margin:16px 0 7px}.hint{color:var(--muted);font-size:14px;margin-bottom:12px}input,select,textarea{width:100%;max-width:650px;border:1px solid #a9b6c2;border-radius:4px;padding:12px;font-size:16px;background:#fff;margin:0 0 14px}textarea{min-height:110px}.option-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0 18px}.option{border:1px solid var(--line);border-radius:8px;padding:13px;background:#fff;display:flex;gap:10px;align-items:flex-start}.option:has(input:checked){border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue);background:#f0f9ff}.option input{width:20px;height:20px;margin:1px 0 0;flex:0 0 auto}.option label{font-size:15px;font-weight:700;margin:0}.option small{display:block;color:var(--muted);font-weight:400;margin-top:4px}.actions{margin-top:20px}.hidden{display:none!important}.summary{width:100%;border-collapse:collapse;font-size:15px}.summary th,.summary td{border-bottom:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.summary th{width:34%;color:#263441}.result{border-left:7px solid var(--blue);margin:14px 0}.result.good{border-left-color:var(--green)}.result.watch{border-left-color:var(--amber)}.result.high,.risk{border-left-color:var(--red)}.risk{margin:16px 0}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin:34px 0}.scenario{padding:0;overflow:hidden}.scenario .img{height:92px;background:linear-gradient(135deg,#0b2938,#0798d8)}.scenario div:last-child{padding:16px}.scenario h3{font-size:17px;margin:0 0 8px;color:var(--blue)}footer{background:var(--navy);color:#cbd5df;padding:34px 0;font-size:14px}.footgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:28px}.small{font-size:13px;color:var(--muted)}
-    @media(max-width:850px){.hero-inner,.layout,.footgrid{grid-template-columns:1fr}.phone,.nav{display:none}.steps{grid-template-columns:1fr 1fr}.hero-inner{min-height:auto}.side{order:-1}}
-    @media print{.top,.nav,.hero,.steps,.side,.actions,footer{display:none!important}main{padding:0;background:#fff}.wrap{width:100%}.layout{display:block}.panel,.result,.risk{box-shadow:none;break-inside:avoid}.summary{font-size:12px}body{font-size:13px}}
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--black);
+      background:var(--white);
+      font-size:18px;
+      line-height:1.45;
+    }
+
+    .wrap{
+      width:min(var(--max),calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .top{
+      background:var(--black);
+      color:#fff;
+      border-bottom:8px solid var(--blue);
+    }
+
+    .top-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 0;
+      gap:20px;
+    }
+
+    .brand{
+      font-size:26px;
+      font-weight:800;
+      letter-spacing:-.4px;
+    }
+
+    .brand span{
+      display:block;
+      color:#9ad0f5;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      margin-top:3px;
+    }
+
+    .contact{
+      font-size:18px;
+      white-space:nowrap;
+    }
+
+    .nav{
+      background:#1f2326;
+      color:#fff;
+    }
+
+    .nav-inner{
+      display:flex;
+      gap:28px;
+      padding:12px 0;
+      font-size:14px;
+      text-transform:uppercase;
+    }
+
+    .nav-inner span:first-child{
+      color:#9ad0f5;
+    }
+
+    .hero{
+      background:linear-gradient(90deg,rgba(11,12,12,.93),rgba(11,12,12,.64)),url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1800&q=80') center/cover;
+      color:#fff;
+    }
+
+    .hero-inner{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:36px;
+      align-items:center;
+      min-height:360px;
+      padding:48px 0;
+    }
+
+    .eyebrow{
+      color:#9ad0f5;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .hero h1{
+      font-size:clamp(38px,5vw,58px);
+      line-height:1.03;
+      margin:12px 0 18px;
+      text-transform:uppercase;
+    }
+
+    .hero p{
+      max-width:650px;
+      font-size:19px;
+    }
+
+    .hero-card{
+      background:rgba(11,12,12,.78);
+      border:1px solid rgba(255,255,255,.2);
+      padding:22px;
+    }
+
+    .hero-card div{
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.16);
+    }
+
+    .hero-card div:last-child{
+      border-bottom:0;
+    }
+
+    .hero-card strong{
+      display:block;
+    }
+
+    .hero-card span{
+      display:block;
+      color:#d5dce2;
+      font-size:14px;
+      margin-top:3px;
+    }
+
+    .btn{
+      border:0;
+      background:var(--green);
+      color:#fff;
+      font-weight:800;
+      font-size:16px;
+      padding:12px 18px;
+      cursor:pointer;
+      box-shadow:0 2px 0 #00401f;
+      margin:8px 8px 8px 0;
+    }
+
+    .btn:hover{
+      filter:brightness(.95);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--black);
+      border:1px solid var(--border);
+      box-shadow:0 2px 0 var(--border);
+    }
+
+    .btn.blue{
+      background:var(--blue);
+      box-shadow:0 2px 0 var(--blue-dark);
+    }
+
+    main{
+      background:#fff;
+      padding:28px 0 64px;
+    }
+
+    .notice{
+      background:#eef7ff;
+      border-left:5px solid var(--blue);
+      padding:16px 18px;
+      margin:0 0 24px;
+    }
+
+    .mini-note{
+      font-size:14px;
+      color:var(--grey-3);
+    }
+
+    .scenarios{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+      margin:28px 0;
+    }
+
+    .scenario{
+      border:1px solid var(--border);
+      background:#fff;
+    }
+
+    .scenario .bar{
+      height:8px;
+      background:var(--blue);
+    }
+
+    .scenario div:last-child{
+      padding:16px;
+    }
+
+    .scenario h3{
+      font-size:18px;
+      margin:0 0 8px;
+      color:var(--blue-dark);
+    }
+
+    .scenario p{
+      margin:0;
+      color:var(--grey-3);
+      font-size:15px;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:8px;
+      margin:24px 0;
+    }
+
+    .step{
+      text-align:center;
+      color:var(--grey-3);
+      font-size:13px;
+    }
+
+    .bubble{
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      border:2px solid var(--border);
+      display:grid;
+      place-items:center;
+      margin:0 auto 7px;
+      background:#fff;
+      font-weight:700;
+    }
+
+    .step.active{
+      color:var(--blue-dark);
+      font-weight:800;
+    }
+
+    .step.active .bubble{
+      background:var(--blue);
+      border-color:var(--blue);
+      color:#fff;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 290px;
+      gap:22px;
+    }
+
+    .panel,.side,.result,.risk{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:24px;
+    }
+
+    .section-title{
+      font-size:15px;
+      color:var(--blue-dark);
+      font-weight:800;
+      text-transform:uppercase;
+      border-bottom:1px solid var(--border);
+      padding-bottom:12px;
+      margin-bottom:18px;
+    }
+
+    .side h3{
+      margin-top:0;
+    }
+
+    .progressbar{
+      height:6px;
+      background:var(--grey-1);
+      overflow:hidden;
+    }
+
+    .progressbar span{
+      display:block;
+      height:100%;
+      background:var(--blue);
+      width:0;
+    }
+
+    .checkrow{
+      display:flex;
+      justify-content:space-between;
+      border-bottom:1px solid #e5e5e5;
+      padding:9px 0;
+      font-size:14px;
+    }
+
+    .checkrow.done{
+      color:var(--green);
+      font-weight:700;
+    }
+
+    label{
+      font-size:24px;
+      font-weight:800;
+      display:block;
+      margin:10px 0 8px;
+    }
+
+    .hint{
+      color:var(--grey-3);
+      font-size:15px;
+      margin-bottom:12px;
+    }
+
+    input,select,textarea{
+      width:100%;
+      max-width:650px;
+      border:2px solid var(--black);
+      padding:11px;
+      font-size:17px;
+      background:#fff;
+      margin:0 0 14px;
+    }
+
+    textarea{
+      min-height:110px;
+    }
+
+    .option-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:10px;
+      margin:12px 0 18px;
+    }
+
+    .option{
+      border:2px solid var(--border);
+      padding:12px;
+      background:#fff;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .option:has(input:checked){
+      border-color:var(--blue);
+      box-shadow:inset 0 0 0 1px var(--blue);
+      background:#f4faff;
+    }
+
+    .option input{
+      width:22px;
+      height:22px;
+      margin:0;
+      flex:0 0 auto;
+    }
+
+    .option label{
+      font-size:16px;
+      font-weight:700;
+      margin:0;
+    }
+
+    .option small{
+      display:block;
+      color:var(--grey-3);
+      font-weight:400;
+      margin-top:4px;
+    }
+
+    .actions{
+      margin-top:18px;
+    }
+
+    .hidden{
+      display:none!important;
+    }
+
+    .summary{
+      width:100%;
+      border-collapse:collapse;
+      font-size:15px;
+    }
+
+    .summary th,.summary td{
+      border-bottom:1px solid var(--border);
+      padding:10px;
+      text-align:left;
+      vertical-align:top;
+    }
+
+    .summary th{
+      width:34%;
+    }
+
+    .result{
+      border-left:7px solid var(--blue);
+      margin:14px 0;
+    }
+
+    .result.good{
+      border-left-color:var(--green);
+    }
+
+    .result.watch{
+      border-left-color:var(--orange);
+    }
+
+    .result.high,.risk{
+      border-left-color:var(--red);
+    }
+
+    .risk{
+      margin:16px 0;
+      background:#fff8f6;
+    }
+
+    footer{
+      background:var(--black);
+      color:#cbd5df;
+      padding:28px 0;
+      font-size:14px;
+    }
+
+    .foot{
+      display:grid;
+      grid-template-columns:1.3fr 1fr 1fr;
+      gap:28px;
+    }
+
+    @media(max-width:850px){
+      .hero-inner,.layout,.foot{
+        grid-template-columns:1fr;
+      }
+
+      .nav,.contact{
+        display:none;
+      }
+
+      .steps{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .hero-inner{
+        min-height:auto;
+      }
+
+      .side{
+        order:-1;
+      }
+    }
+
+    @media print{
+      .top,.nav,.hero,.steps,.side,.actions,footer{
+        display:none!important;
+      }
+
+      main{
+        padding:0;
+      }
+
+      .wrap{
+        width:100%;
+      }
+
+      .panel,.result,.risk{
+        border:1px solid #777;
+        break-inside:avoid;
+      }
+
+      .summary{
+        font-size:12px;
+      }
+
+      body{
+        font-size:13px;
+      }
+    }
   </style>
 </head>
 <body>
-<header class="top"><div class="wrap top-inner"><div class="logo">AVI<br>IMMIGRATION<small>ADVICE LOGIC AI</small></div><div class="phone">0203 617 9173</div></div></header>
-<nav class="nav"><div class="wrap nav-inner"><span>Home</span><span class="active">Assessment</span><span>Services</span><span>About</span><span>Resources</span><span>Contact</span></div></nav>
-<section class="hero"><div class="wrap hero-inner"><div><div class="eyebrow">IAA-regulated adviser triage</div><h1>Smart immigration guidance. Clearer next steps.</h1><p>Answer carefully structured questions and receive a printable route-screening summary based on UK immigration categories, suitability concerns and Home Office-style decision points.</p><button class="btn" onclick="startAssessment()">Start assessment</button> <button class="btn secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How it works</button></div><div class="hero-card"><div><strong>IAA regulated</strong><span>Designed for professional immigration advice triage.</span></div><div><strong>No data storage</strong><span>Answers remain in the browser and can be printed or saved as PDF.</span></div><div><strong>Conditional logic</strong><span>Questions only appear where they make sense.</span></div></div></div></section>
-<main><div class="wrap">
-  <div class="notice" id="how"><strong>Important:</strong> This tool gives a structured initial screening only. A full adviser review, document check and current Immigration Rules check are required before any application is made.</div>
-  <section id="start"><div class="cards"><div class="scenario"><div class="img"></div><div><h3>Visitor overstayed</h3><p class="small">Entered as visitor, visa expired, children/family may affect route.</p></div></div><div class="scenario"><div class="img"></div><div><h3>Long residence</h3><p class="small">10 years lawful residence or 20 years including complex residence.</p></div></div><div class="scenario"><div class="img"></div><div><h3>Illegal entry</h3><p class="small">Entered unlawfully and needs lawful options screened carefully.</p></div></div><div class="scenario"><div class="img"></div><div><h3>Asylum/protection</h3><p class="small">Fear of return, conflict, persecution or serious harm.</p></div></div></div></section>
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">Talk Visa Immigration Advice AI<span>IAA-regulated adviser triage</span></div>
+    <div class="contact">0203 617 9173</div>
+  </div>
+</header>
 
-  <section id="app" class="hidden">
-    <div class="steps" id="steps"></div>
-    <div class="layout">
-      <div class="panel"><div class="section-title"><span class="icon" id="routeIcon">1</span><span id="sectionName">About you</span></div><div id="questionBox"></div><div class="actions"><button class="btn secondary" id="backBtn" onclick="goBack()">Back</button><button class="btn" onclick="goNext()" id="nextBtn">Save & continue</button></div></div>
-      <aside class="side"><h3>Your progress</h3><div class="progressbar"><span id="bar"></span></div><p><strong id="pct">0%</strong> assessment complete</p><div id="sideRows"></div><div class="notice"><strong>What happens next?</strong><br><span class="small">Complete the relevant questions, review the generated summary, then print or save the report.</span></div><p class="small">Your answers are not saved or submitted.</p></aside>
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <span>Assessment</span>
+    <span>Personal immigration</span>
+    <span>Work immigration</span>
+    <span>Human rights</span>
+    <span>Contact</span>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Private immigration route screening</div>
+      <h1>Clear questions. Lawful routes. Printable summary.</h1>
+      <p>Answer structured questions and receive an initial adviser-style screening report. The tool only asks follow-up questions that make sense based on earlier answers.</p>
+      <button class="btn blue" onclick="startAssessment()">Start assessment</button>
+      <button class="btn secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How it works</button>
     </div>
-  </section>
 
-  <section id="results" class="hidden panel"><h1>Printable immigration assessment summary</h1><p>Generated on <strong id="dateDone"></strong>. This is an initial route-screening report only.</p><h2>Answers given</h2><table class="summary" id="answerTable"></table><h2>Potential lawful routes and decision points</h2><div id="routeBox"></div><h2>Evidence checklist</h2><div id="evidenceBox"></div><h2>Route category reference codes</h2><div id="codeBox"></div><div class="actions"><button class="btn" onclick="window.print()">Print or save as PDF</button><button class="btn secondary" onclick="restart()">Start again</button></div></section>
-</div></main>
-<footer><div class="wrap footgrid"><div><div class="logo" style="display:inline-block">AVI<br>IMMIGRATION<small>ADVICE LOGIC AI</small></div><p>Professional immigration route screening for adviser review.</p></div><div><strong>Core areas</strong><br>Personal immigration<br>Work & business immigration<br>Human rights & asylum</div><div><strong>Rules note</strong><br>Structure based on UK Immigration Rules categories and Home Office guidance. Always check current rules before submission.</div></div></footer>
+    <div class="hero-card">
+      <div><strong>No data storage</strong><span>Answers stay in the browser unless printed or saved by the user.</span></div>
+      <div><strong>Conditional logic</strong><span>Salary questions only appear where a sponsor or job offer exists.</span></div>
+      <div><strong>Professional caution</strong><span>Routes are flagged for adviser review, not guaranteed outcomes.</span></div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="notice" id="how">
+      <strong>Important:</strong> This is an initial triage tool. Before any application is made, the adviser must check documents, immigration history, suitability, current Immigration Rules and current Home Office guidance.
+    </div>
+
+    <section id="start">
+      <div class="scenarios">
+        <div class="scenario"><div class="bar"></div><div><h3>Visitor overstayed</h3><p>Entered as visitor, permission expired, now needs lawful options screened.</p></div></div>
+        <div class="scenario"><div class="bar"></div><div><h3>Children and family</h3><p>British child, 7-year child, partner route or parent route issues.</p></div></div>
+        <div class="scenario"><div class="bar"></div><div><h3>10 or 20 years in UK</h3><p>Long lawful residence or private life where residence includes unlawful time.</p></div></div>
+        <div class="scenario"><div class="bar"></div><div><h3>Illegal entry or asylum</h3><p>Protection, serious harm, trafficking, domestic abuse or safeguarding triggers.</p></div></div>
+      </div>
+    </section>
+
+    <section id="app" class="hidden">
+      <div class="steps" id="steps"></div>
+
+      <div class="layout">
+        <div class="panel">
+          <div class="section-title" id="sectionName">About you</div>
+          <div id="questionBox"></div>
+          <div class="actions">
+            <button class="btn secondary" id="backBtn" onclick="goBack()">Back</button>
+            <button class="btn blue" onclick="goNext()">Save and continue</button>
+          </div>
+        </div>
+
+        <aside class="side">
+          <h3>Your progress</h3>
+          <div class="progressbar"><span id="bar"></span></div>
+          <p><strong id="pct">0%</strong> complete</p>
+          <div id="sideRows"></div>
+          <div class="notice"><strong>Next:</strong><br><span class="mini-note">Answer all relevant questions, review the summary, then print or save as PDF.</span></div>
+          <p class="mini-note">Nothing is submitted or saved.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="results" class="hidden panel">
+      <h1>Printable immigration assessment summary</h1>
+      <p>Generated on <strong id="dateDone"></strong>. This is a screening report for adviser review.</p>
+
+      <h2>Answers given</h2>
+      <table class="summary" id="answerTable"></table>
+
+      <h2>Potential lawful routes and decision points</h2>
+      <div id="routeBox"></div>
+
+      <h2>Evidence checklist</h2>
+      <div id="evidenceBox"></div>
+
+      <h2>Route reference codes</h2>
+      <div id="codeBox"></div>
+
+      <div class="actions">
+        <button class="btn blue" onclick="window.print()">Print or save as PDF</button>
+        <button class="btn secondary" onclick="restart()">Start again</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><strong>Talk Visa Immigration Advice AI</strong><p>Professional immigration route screening for adviser review.</p></div>
+    <div><strong>Core areas</strong><br>Family<br>Work<br>Settlement<br>Human rights and asylum</div>
+    <div><strong>Rules note</strong><br>Check current Immigration Rules and Home Office guidance before advising submission.</div>
+  </div>
+</footer>
+
 <script>
 /*
 ROUTE CATEGORY CODES FOR FUTURE EDITING
-R1  Visitor
-R2  Overstayer / visa expired
-R3  Skilled Worker
-R4  Health and Care Worker
-R5  Student
-R6  Graduate
-R7  Partner / spouse
-R8  Parent of child
-R9  Private Life
-R10 Long Residence ILR
-R11 EU Settlement Scheme
-R12 Refugee / Humanitarian Protection
-R13 Asylum / Protection claim
-R14 ILR / settled status
-R15 British citizenship / naturalisation
-R16 No lawful status
-R17 Outside UK application
-R18 Illegal entry
-R19 Domestic abuse / bereaved partner
-R20 Trafficking / modern slavery / safeguarding
+
+R1   Visitor
+R2   Overstayer / expired permission
+R3   Skilled Worker
+R4   Health and Care Worker
+R5   Student
+R6   Graduate
+R7   Partner / spouse
+R8   Parent of child
+R9   Private Life
+R10  10-year Long Residence ILR
+R11  EU Settlement Scheme
+R12  Refugee / Humanitarian Protection
+R13  Asylum / Protection claim
+R14  ILR / settled status
+R15  British citizenship / naturalisation
+R16  No lawful status / unsure status
+R17  Outside UK / entry clearance planning
+R18  Illegal entry
+R19  Domestic abuse / bereaved partner
+R20  Trafficking / modern slavery / safeguarding
 */
+
 const ROUTES = {
- R1:'Visitor', R2:'Overstayer / visa expired', R3:'Skilled Worker', R4:'Health and Care Worker', R5:'Student', R6:'Graduate', R7:'Partner / spouse', R8:'Parent of child', R9:'Private Life', R10:'Long Residence ILR', R11:'EU Settlement Scheme', R12:'Refugee / Humanitarian Protection', R13:'Asylum / protection claim', R14:'ILR / settled status', R15:'British citizenship / naturalisation', R16:'No lawful status', R17:'Outside UK application', R18:'Illegal entry', R19:'Domestic abuse / bereaved partner', R20:'Trafficking / safeguarding'
+  R1:'Visitor',
+  R2:'Overstayer / expired permission',
+  R3:'Skilled Worker',
+  R4:'Health and Care Worker',
+  R5:'Student',
+  R6:'Graduate',
+  R7:'Partner / spouse',
+  R8:'Parent of child',
+  R9:'Private Life',
+  R10:'10-year Long Residence ILR',
+  R11:'EU Settlement Scheme',
+  R12:'Refugee / Humanitarian Protection',
+  R13:'Asylum / Protection claim',
+  R14:'ILR / settled status',
+  R15:'British citizenship / naturalisation',
+  R16:'No lawful status / unsure status',
+  R17:'Outside UK / entry clearance planning',
+  R18:'Illegal entry',
+  R19:'Domestic abuse / bereaved partner',
+  R20:'Trafficking / safeguarding'
 };
-const countries=['Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Czechia','Democratic Republic of the Congo','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Ivory Coast','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kosovo','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway','Oman','Pakistan','Palau','Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Sweden','Switzerland','Syria','Taiwan','Tajikistan','Tanzania','Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe','Stateless'];
-const conflict=['Afghanistan','Eritrea','Iran','Iraq','Libya','Myanmar','Palestine','Somalia','South Sudan','Sudan','Syria','Ukraine','Venezuela','Yemen'];
-const sections=['About you','Immigration history','Work, study & family','Lawfulness & suitability','Review & results'];
-const Q=[
- {s:0,id:'name',label:'Full name',type:'text'},
- {s:0,id:'dob',label:'Date of birth',type:'date'},
- {s:0,id:'nationality',label:'Nationality / citizenship',type:'country'},
- {s:0,id:'birthCountry',label:'Country of birth',type:'country'},
- {s:0,id:'location',label:'Where are you currently?',type:'select',options:[['uk','Inside the UK'],['outside','Outside the UK']]},
- {s:0,id:'status',label:'Current immigration category',type:'cards',options:[['R1','Visitor / tourist','In the UK as a visitor'],['R2','Overstayer','Visa expired / overstayed after previous leave'],['R3','Skilled Worker','Sponsored work route'],['R4','Health & Care Worker','Sponsored health/care route'],['R5','Student','Student permission'],['R6','Graduate','Graduate route'],['R7','Partner / spouse','Partner or spouse route'],['R8','Parent','Parent of a child route'],['R9','Private Life','Private life permission'],['R11','EUSS','Pre-settled or settled status'],['R12','Refugee / HP','Refugee or humanitarian protection'],['R13','Asylum pending','Protection claim awaiting decision'],['R14','ILR / settled','Indefinite leave or settled status'],['R16','No lawful status','No current leave, not just expired leave'],['R17','Outside UK','Planning to apply from abroad'],['R18','Illegal entry','Entered without permission'],['other','Other / unsure','Not listed or unsure']]},
 
- {s:1,id:'firstArrival',label:'Date first entered the UK',type:'date',show:a=>a.location==='uk'},
- {s:1,id:'lastEntry',label:'Date last entered the UK',type:'date',show:a=>a.location==='uk'},
- {s:1,id:'entryLawful',label:'Did you enter the UK with valid permission?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>a.location==='uk'},
- {s:1,id:'permissionStart',label:'Current permission start date',type:'date',show:a=>['R3','R4','R5','R6','R7','R8','R9','R11','R12','R14'].includes(a.status)},
- {s:1,id:'permissionExpiry',label:'Current permission expiry date',type:'date',show:a=>['R1','R3','R4','R5','R6','R7','R8','R9','R11'].includes(a.status)},
- {s:1,id:'expiredDate',label:'When did your last permission expire?',type:'date',show:a=>['R2','R16'].includes(a.status)},
- {s:1,id:'lawfulYears',label:'Continuous lawful UK residence',type:'select',options:[['under5','Under 5 years'],['5plus','At least 5 years'],['10plus','At least 10 years'],['unknown','Not sure']],show:a=>a.location==='uk'},
- {s:1,id:'totalYears',label:'Total time living in the UK',type:'select',options:[['under7','Under 7 years'],['7plus','7 years or more'],['10plus','10 years or more'],['20plus','20 years or more'],['unknown','Not sure']],show:a=>a.location==='uk'},
- {s:1,id:'absences',label:'Any long absences from the UK?',hint:'For ILR/citizenship this must be calculated precisely.',type:'radio',options:[['no','No'],['yes','Yes'],['unsure','Not sure']],show:a=>a.location==='uk'},
-
- {s:2,id:'hasSponsorNow',label:'Are you currently sponsored by a Home Office licensed sponsor?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>['R3','R4'].includes(a.status)},
- {s:2,id:'hasJobOffer',label:'Do you have a genuine job offer from a Home Office licensed sponsor?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>['R5','R6','R1','R2','R16','R17','other'].includes(a.status)},
- {s:2,id:'salaryOccupationOk',label:'Does the sponsored job appear to meet salary and occupation-code requirements?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>(a.hasSponsorNow==='yes'||a.hasJobOffer==='yes')},
- {s:2,id:'courseComplete',label:'Have you completed, or are you expected to complete, your UK course?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>a.status==='R5'},
- {s:2,id:'family',label:'Close family in the UK',type:'checkbox',options:[['britishPartner','British/Irish partner or spouse'],['settledPartner','Settled/ILR partner or spouse'],['protectionPartner','Partner with refugee/humanitarian protection'],['limitedPartner','Partner with limited leave'],['britishChild','British child'],['sevenYearChild','Child lived in UK 7+ years'],['otherChild','Other child in UK'],['none','No close family in UK']]},
- {s:2,id:'partnerRouteAvailable',label:'If relying on a child, is there also a genuine partner route available?',hint:'Parent route may not be correct if the applicant is eligible as a partner.',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure'],['na','Not applicable']],show:a=>(a.family||[]).some(x=>['britishChild','sevenYearChild','otherChild'].includes(x))},
- {s:2,id:'relationshipEvidence',label:'Can relationship, parental responsibility and living/contact arrangements be evidenced?',type:'radio',options:[['yes','Yes'],['partial','Partly'],['no','No'],['na','Not applicable']],show:a=>(a.family||[]).some(x=>x!=='none')},
- {s:2,id:'domesticBereaved',label:'Is there domestic abuse or has the sponsoring partner died?',type:'radio',options:[['domestic','Domestic abuse'],['bereaved','Sponsoring partner has died'],['no','No'],['prefer','Prefer not to say']],show:a=>(a.family||[]).some(x=>['britishPartner','settledPartner','protectionPartner'].includes(x))},
-
- {s:3,id:'fearReturn',label:'Would you be afraid to return to your nationality/country of residence?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']]},
- {s:3,id:'fearReason',label:'Reason for fear of return',type:'checkbox',options:[['race','Race/ethnicity'],['religion','Religion'],['nationality','Nationality'],['political','Political opinion'],['socialGroup','Particular social group, gender, sexuality, family or clan'],['war','War/general violence'],['state','Government/state authorities'],['nonState','Family, gang, militia or non-state actor'],['medical','Medical/humanitarian crisis'],['other','Other']],show:a=>['yes','unsure'].includes(a.fearReturn)},
- {s:3,id:'safeRelocation',label:'Could you safely and reasonably live elsewhere in that country?',type:'radio',options:[['yes','Yes'],['no','No'],['unsure','Not sure']],show:a=>['yes','unsure'].includes(a.fearReturn)},
- {s:3,id:'suitability',label:'Any suitability or good-character issues?',type:'checkbox',options:[['refusal','Visa refusal or appeal'],['deception','Deception/false document allegation'],['criminal','Criminal conviction/caution/pending charge'],['removal','Removal/deportation/exclusion'],['nhs','NHS debt'],['publicFunds','Public funds issue'],['none','None known']]},
- {s:3,id:'vulnerability',label:'Any urgent vulnerability or exceptional circumstances?',type:'checkbox',options:[['domesticAbuse','Domestic abuse'],['trafficking','Trafficking/modern slavery'],['medical','Serious medical issue'],['safeguarding','Child/adult safeguarding'],['destitution','Homelessness/destitution'],['none','None known']]},
- {s:3,id:'english',label:'Can the English language requirement be met where required?',type:'radio',options:[['yes','Yes'],['no','No'],['exempt','Exempt'],['unsure','Not sure']]},
- {s:3,id:'lituk',label:'Has the Life in the UK Test been passed?',type:'radio',options:[['yes','Yes'],['no','No'],['exempt','Exempt'],['notyet','Not yet / not applicable']]},
-
- {s:4,id:'goal',label:'Main goal',type:'select',options:[['extend','Extend current permission'],['switch','Switch route'],['settle','ILR / settlement'],['citizenship','British citizenship'],['regularise','Regularise status'],['protect','Protection/asylum'],['family','Family application'],['challenge','Challenge refusal'],['unsure','Not sure']]},
- {s:4,id:'notes',label:'Anything else important?',type:'textarea',optional:true}
+const regionCodes = [
+  'AF','AX','AL','DZ','AS','AD','AO','AI','AQ','AG','AR','AM','AW','AU','AT','AZ','BS','BH','BD','BB','BY','BE','BZ','BJ','BM','BT','BO','BQ','BA','BW','BV','BR','IO','BN','BG','BF','BI','CV','KH','CM','CA','KY','CF','TD','CL','CN','CX','CC','CO','KM','CG','CD','CK','CR','CI','HR','CU','CW','CY','CZ','DK','DJ','DM','DO','EC','EG','SV','GQ','ER','EE','SZ','ET','FK','FO','FJ','FI','FR','GF','PF','TF','GA','GM','GE','DE','GH','GI','GR','GL','GD','GP','GU','GT','GG','GN','GW','GY','HT','HM','VA','HN','HK','HU','IS','IN','ID','IR','IQ','IE','IM','IL','IT','JM','JP','JE','JO','KZ','KE','KI','KP','KR','KW','KG','LA','LV','LB','LS','LR','LY','LI','LT','LU','MO','MG','MW','MY','MV','ML','MT','MH','MQ','MR','MU','YT','MX','FM','MD','MC','MN','ME','MS','MA','MZ','MM','NA','NR','NP','NL','NC','NZ','NI','NE','NG','NU','NF','MK','MP','NO','OM','PK','PW','PS','PA','PG','PY','PE','PH','PN','PL','PT','PR','QA','RE','RO','RU','RW','BL','SH','KN','LC','MF','PM','VC','WS','SM','ST','SA','SN','RS','SC','SL','SG','SX','SK','SI','SB','SO','ZA','GS','SS','ES','LK','SD','SR','SJ','SE','CH','SY','TW','TJ','TZ','TH','TL','TG','TK','TO','TT','TN','TR','TM','TC','TV','UG','UA','AE','GB','US','UM','UY','UZ','VU','VE','VN','VG','VI','WF','EH','YE','ZM','ZW'
 ];
-let answers={}, visible=[], idx=0;
-function startAssessment(){document.getElementById('start').classList.add('hidden');document.getElementById('app').classList.remove('hidden');render()}
-function shown(q){return !q.show||q.show(answers)}
-function refresh(){visible=Q.filter(shown)}
-function renderSteps(){let active=visible[idx]?.s||0;document.getElementById('steps').innerHTML=sections.map((s,n)=>`<div class="step ${n===active?'active':''}"><div class="bubble">${n+1}</div>${s}</div>`).join('');document.getElementById('sectionName').textContent=sections[active];document.getElementById('routeIcon').textContent=active+1;let pct=Math.round((idx/Math.max(visible.length-1,1))*100);document.getElementById('bar').style.width=pct+'%';document.getElementById('pct').textContent=pct+'%';document.getElementById('sideRows').innerHTML=sections.map((s,n)=>`<div class="checkrow ${n<active?'done':''}"><span>${s}</span><span>${n<active?'✓':'○'}</span></div>`).join('')}
-function render(){refresh(); if(idx>=visible.length)idx=visible.length-1; const q=visible[idx]; renderSteps(); document.getElementById('backBtn').style.display=idx?'inline-block':'none'; let h=`<label>${q.label}</label>${q.hint?`<div class="hint">${q.hint}</div>`:''}`;
- if(['text','date'].includes(q.type))h+=`<input id="${q.id}" type="${q.type}" value="${answers[q.id]||''}">`;
- if(q.type==='textarea')h+=`<textarea id="${q.id}">${answers[q.id]||''}</textarea>`;
- if(q.type==='country')h+=`<select id="${q.id}"><option value="">Select country</option>${countries.map(c=>`<option ${answers[q.id]===c?'selected':''}>${c}</option>`).join('')}</select>`;
- if(q.type==='select')h+=`<select id="${q.id}"><option value="">Select one</option>${q.options.map(o=>`<option value="${o[0]}" ${answers[q.id]===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>`;
- if(q.type==='radio')h+=`<div class="option-grid">${q.options.map(o=>`<div class="option"><input type="radio" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${answers[q.id]===o[0]?'checked':''}><label for="${q.id}_${o[0]}">${o[1]}</label></div>`).join('')}</div>`;
- if(q.type==='checkbox'){let vals=answers[q.id]||[];h+=`<div class="option-grid">${q.options.map(o=>`<div class="option"><input type="checkbox" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${vals.includes(o[0])?'checked':''}><label for="${q.id}_${o[0]}">${o[1]}</label></div>`).join('')}</div>`}
- if(q.type==='cards')h+=`<div class="option-grid">${q.options.map(o=>`<div class="option"><input type="radio" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${answers[q.id]===o[0]?'checked':''}><label for="${q.id}_${o[0]}">${o[1]}<small>${o[2]||''}</small></label></div>`).join('')}</div>`;
- document.getElementById('questionBox').innerHTML=h}
-function save(){let q=visible[idx],v=''; if(['radio','cards'].includes(q.type)){let el=document.querySelector(`input[name="${q.id}"]:checked`);v=el?el.value:''}else if(q.type==='checkbox'){v=[...document.querySelectorAll(`input[name="${q.id}"]:checked`)].map(x=>x.value)}else{let el=document.getElementById(q.id);v=el?el.value.trim():''} if(!q.optional&&((Array.isArray(v)&&!v.length)||(!Array.isArray(v)&&!v))){alert('Please answer this question.');return false} answers[q.id]=v; cleanContradictions(q.id); return true}
-function cleanContradictions(id){
- if(id==='status'){delete answers.hasSponsorNow; delete answers.hasJobOffer; delete answers.salaryOccupationOk; delete answers.courseComplete;}
- if(id==='hasSponsorNow' && answers.hasSponsorNow!=='yes') delete answers.salaryOccupationOk;
- if(id==='hasJobOffer' && answers.hasJobOffer!=='yes') delete answers.salaryOccupationOk;
- if(id==='family' && (answers.family||[]).includes('none')){answers.family=['none']; delete answers.relationshipEvidence; delete answers.partnerRouteAvailable; delete answers.domesticBereaved;}
- if(id==='fearReturn' && !['yes','unsure'].includes(answers.fearReturn)){delete answers.fearReason; delete answers.safeRelocation;}
+
+const displayNames = new Intl.DisplayNames(['en'], { type:'region' });
+const countries = [...new Set(regionCodes.map(code => displayNames.of(code)).filter(Boolean))]
+  .sort((a,b)=>a.localeCompare(b))
+  .concat(['Kosovo','Stateless']);
+
+const conflictCountries = [
+  'Afghanistan','Eritrea','Iran','Iraq','Libya','Myanmar','Palestine','Somalia','South Sudan','Sudan','Syria','Ukraine','Venezuela','Yemen'
+];
+
+const sections = [
+  'About you',
+  'Immigration history',
+  'Work, study and family',
+  'Lawfulness and risk',
+  'Review'
+];
+
+const Q = [
+  {s:0,id:'name',label:'Full name',type:'text'},
+  {s:0,id:'dob',label:'Date of birth',type:'date'},
+  {s:0,id:'nationality',label:'Nationality / citizenship',type:'country'},
+  {s:0,id:'birthCountry',label:'Country of birth',type:'country'},
+  {s:0,id:'location',label:'Where is the person currently?',type:'select',options:[
+    ['uk','Inside the UK'],
+    ['outside','Outside the UK']
+  ]},
+  {s:0,id:'status',label:'Current immigration category',hint:'Choose the best match. If permission expired, use R2. If the person entered illegally, use R18.',type:'cards',options:[
+    ['R1','R1 Visitor','Visitor or tourist permission'],
+    ['R2','R2 Overstayer','Previous permission expired'],
+    ['R3','R3 Skilled Worker','Currently on Skilled Worker route'],
+    ['R4','R4 Health and Care Worker','Currently on Health and Care route'],
+    ['R5','R5 Student','Student permission'],
+    ['R6','R6 Graduate','Graduate route'],
+    ['R7','R7 Partner / spouse','Partner or spouse route'],
+    ['R8','R8 Parent','Parent of a child route'],
+    ['R9','R9 Private Life','Private life permission'],
+    ['R11','R11 EUSS','Pre-settled or settled status'],
+    ['R12','R12 Refugee / HP','Refugee or humanitarian protection'],
+    ['R13','R13 Asylum pending','Asylum or protection claim pending'],
+    ['R14','R14 ILR / settled','Indefinite leave or settled status'],
+    ['R16','R16 No lawful status','No current leave or status unclear'],
+    ['R17','R17 Outside UK','Planning entry clearance'],
+    ['R18','R18 Illegal entry','Entered without permission'],
+    ['other','Other / unsure','Not listed or unsure']
+  ]},
+
+  {s:1,id:'firstArrival',label:'Date first entered the UK',type:'date',show:a=>a.location==='uk'},
+  {s:1,id:'lastEntry',label:'Date last entered the UK',type:'date',show:a=>a.location==='uk'},
+  {s:1,id:'entryLawful',label:'Did the person enter the UK with valid permission?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>a.location==='uk'},
+  {s:1,id:'permissionStart',label:'Current permission start date',type:'date',show:a=>['R1','R3','R4','R5','R6','R7','R8','R9','R11','R12','R14'].includes(a.status)},
+  {s:1,id:'permissionExpiry',label:'Current permission expiry date',type:'date',show:a=>['R1','R3','R4','R5','R6','R7','R8','R9','R11'].includes(a.status)},
+  {s:1,id:'expiredDate',label:'When did the last permission expire?',type:'date',show:a=>a.status==='R2'},
+  {s:1,id:'lawfulYears',label:'Continuous lawful UK residence',type:'select',options:[
+    ['under5','Under 5 years'],
+    ['5plus','At least 5 years'],
+    ['10plus','At least 10 years'],
+    ['unknown','Not sure']
+  ],show:a=>a.location==='uk'},
+  {s:1,id:'totalYears',label:'Total time living in the UK',type:'select',options:[
+    ['under7','Under 7 years'],
+    ['7plus','7 years or more'],
+    ['10plus','10 years or more'],
+    ['20plus','20 years or more'],
+    ['unknown','Not sure']
+  ],show:a=>a.location==='uk'},
+  {s:1,id:'absences',label:'Any long absences from the UK?',hint:'For ILR and citizenship this must be calculated precisely.',type:'radio',options:[
+    ['no','No'],
+    ['yes','Yes'],
+    ['unsure','Not sure']
+  ],show:a=>a.location==='uk'},
+
+  {s:2,id:'hasSponsorNow',label:'Is the person currently sponsored by a Home Office licensed sponsor?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>['R3','R4'].includes(a.status)},
+  {s:2,id:'hasJobOffer',label:'Does the person have a genuine job offer from a Home Office licensed sponsor?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>['R1','R2','R5','R6','R16','R17','R18','other'].includes(a.status)},
+  {s:2,id:'salaryOccupationOk',label:'Does the sponsored job meet salary and occupation-code requirements?',hint:'Only answer this where a current sponsor or genuine sponsored job offer exists.',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>a.hasSponsorNow==='yes'||a.hasJobOffer==='yes'},
+  {s:2,id:'courseComplete',label:'Has the person completed, or are they expected to complete, their UK course?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>a.status==='R5'},
+  {s:2,id:'eussType',label:'Which EUSS status does the person have?',type:'radio',options:[
+    ['settled','Settled status'],
+    ['preSettled','Pre-settled status'],
+    ['pending','Pending EUSS application'],
+    ['unsure','Not sure']
+  ],show:a=>a.status==='R11'},
+  {s:2,id:'family',label:'Close family in the UK',type:'checkbox',options:[
+    ['britishPartner','British/Irish partner or spouse'],
+    ['settledPartner','Settled/ILR partner or spouse'],
+    ['protectionPartner','Partner with refugee/humanitarian protection'],
+    ['limitedPartner','Partner with limited leave'],
+    ['britishChild','British child'],
+    ['sevenYearChild','Child lived in UK for 7+ years'],
+    ['otherChild','Other child in UK'],
+    ['none','No close family in UK']
+  ]},
+  {s:2,id:'partnerRouteAvailable',label:'If relying on a child, is there also a genuine partner route available?',hint:'The parent route may not be correct if the applicant is eligible as a partner.',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure'],
+    ['na','Not applicable']
+  ],show:a=>(a.family||[]).some(x=>['britishChild','sevenYearChild','otherChild'].includes(x))},
+  {s:2,id:'relationshipEvidence',label:'Can relationship, parental responsibility and living/contact arrangements be evidenced?',type:'radio',options:[
+    ['yes','Yes'],
+    ['partial','Partly'],
+    ['no','No'],
+    ['na','Not applicable']
+  ],show:a=>(a.family||[]).some(x=>x!=='none')},
+  {s:2,id:'domesticBereaved',label:'Is there domestic abuse or has the sponsoring partner died?',type:'radio',options:[
+    ['domestic','Domestic abuse'],
+    ['bereaved','Sponsoring partner has died'],
+    ['no','No'],
+    ['prefer','Prefer not to say']
+  ],show:a=>(a.family||[]).some(x=>['britishPartner','settledPartner','protectionPartner'].includes(x))},
+
+  {s:3,id:'fearReturn',label:'Would the person be afraid to return to their nationality/country of residence?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ]},
+  {s:3,id:'fearReason',label:'Reason for fear of return',type:'checkbox',options:[
+    ['race','Race/ethnicity'],
+    ['religion','Religion'],
+    ['nationality','Nationality'],
+    ['political','Political opinion'],
+    ['socialGroup','Particular social group, gender, sexuality, family or clan'],
+    ['war','War/general violence'],
+    ['state','Government/state authorities'],
+    ['nonState','Family, gang, militia or non-state actor'],
+    ['medical','Medical/humanitarian crisis'],
+    ['other','Other']
+  ],show:a=>['yes','unsure'].includes(a.fearReturn)},
+  {s:3,id:'safeRelocation',label:'Could the person safely and reasonably live elsewhere in that country?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['unsure','Not sure']
+  ],show:a=>['yes','unsure'].includes(a.fearReturn)},
+  {s:3,id:'suitability',label:'Any suitability or good-character issues?',type:'checkbox',options:[
+    ['refusal','Visa refusal or appeal'],
+    ['deception','Deception/false document allegation'],
+    ['criminal','Criminal conviction/caution/pending charge'],
+    ['removal','Removal/deportation/exclusion'],
+    ['nhs','NHS debt'],
+    ['publicFunds','Public funds issue'],
+    ['none','None known']
+  ]},
+  {s:3,id:'vulnerability',label:'Any urgent vulnerability or exceptional circumstances?',type:'checkbox',options:[
+    ['domesticAbuse','Domestic abuse'],
+    ['trafficking','Trafficking/modern slavery'],
+    ['medical','Serious medical issue'],
+    ['safeguarding','Child/adult safeguarding'],
+    ['destitution','Homelessness/destitution'],
+    ['none','None known']
+  ]},
+  {s:3,id:'english',label:'Can the English language requirement be met where required?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['exempt','Exempt'],
+    ['unsure','Not sure']
+  ]},
+  {s:3,id:'lituk',label:'Has the Life in the UK Test been passed?',type:'radio',options:[
+    ['yes','Yes'],
+    ['no','No'],
+    ['exempt','Exempt'],
+    ['notyet','Not yet / not applicable']
+  ]},
+
+  {s:4,id:'goal',label:'Main goal',type:'select',options:[
+    ['extend','Extend current permission'],
+    ['switch','Switch route'],
+    ['settle','ILR / settlement'],
+    ['citizenship','British citizenship'],
+    ['regularise','Regularise status'],
+    ['protect','Protection/asylum'],
+    ['family','Family application'],
+    ['challenge','Challenge refusal'],
+    ['unsure','Not sure']
+  ]},
+  {s:4,id:'notes',label:'Anything else important?',type:'textarea',optional:true}
+];
+
+let answers = {};
+let visible = [];
+let idx = 0;
+
+function startAssessment(){
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
+  render();
 }
-function goNext(){if(!save())return; refresh(); if(idx<visible.length-1){idx++;render()}else showResults()}
-function goBack(){save(); if(idx>0){idx--;render()}}
-function restart(){answers={};idx=0;document.getElementById('results').classList.add('hidden');document.getElementById('start').classList.remove('hidden');scrollTo(0,0)}
-function label(id,val){let q=Q.find(x=>x.id===id); if(!q)return val; if(Array.isArray(val))return val.map(v=>label(id,v)).join(', '); if(q.type==='country')return val; let o=q.options?.find(x=>x[0]===val); return o?o[1]:val}
-function add(list,cls,title,body){list.push(`<div class="result ${cls}"><h3>${title}</h3><p>${body}</p></div>`)}
-function showResults(){document.getElementById('app').classList.add('hidden');document.getElementById('results').classList.remove('hidden');document.getElementById('dateDone').textContent=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); let h='<tbody>'; visible.forEach(q=>{let v=label(q.id,answers[q.id]); if(v)h+=`<tr><th>${esc(q.label)}</th><td>${esc(v)}</td></tr>`}); document.getElementById('answerTable').innerHTML=h+'</tbody>'; logic(); scrollTo(0,0)}
-function logic(){let r=[],risk=[],ev=new Set(['Passport(s) and travel documents','BRP/eVisa/share code/status evidence','All Home Office letters and emails','Full immigration timeline','Proof of address history','Travel/absence list']); const fam=answers.family||[], suit=answers.suitability||[], vuln=answers.vulnerability||[], riskCountry=conflict.includes(answers.nationality)||conflict.includes(answers.birthCountry);
- if((answers.fearReturn==='yes'||answers.fearReturn==='unsure'||riskCountry)&&answers.location==='uk')add(r,'high','R13 Asylum / protection assessment','Assess only where there is a fear of persecution or serious harm on return, no safe internal relocation, and evidence supports protection grounds. Unlawful entry does not automatically prevent claiming asylum, but credibility, delay and safe third country issues need review.');
- if((answers.fearReturn==='yes'||answers.fearReturn==='unsure')&&answers.location==='outside')add(r,'watch','R17 Protection concern outside the UK','A UK asylum claim is normally made from within the UK. Consider lawful entry-clearance routes, family reunion where available, resettlement/special schemes where applicable, or urgent specialist advice.');
- if(['R3','R4'].includes(answers.status)||answers.hasSponsorNow==='yes'||answers.hasJobOffer==='yes')add(r,(answers.salaryOccupationOk==='yes')?'good':'watch','R3/R4 Sponsored work route','Assess only if there is a licensed sponsor, valid CoS, genuine vacancy, eligible occupation code, salary compliance, English language and suitability. If there is no sponsor/job offer, this route should not be suggested.');
- if(answers.status==='R5')add(r,'watch','R5 Student route planning','Assess extension, Graduate route after successful completion, or switch to Skilled Worker only if sponsorship exists. Check switching restrictions before any in-country application.');
- if(answers.status==='R6')add(r,'watch','R6 Graduate route planning','Graduate leave is temporary and does not itself lead directly to settlement. Plan a settlement-leading route before expiry, usually Skilled Worker or qualifying family route.');
- if(fam.includes('britishPartner')||fam.includes('settledPartner')||fam.includes('protectionPartner'))add(r,'good','R7 Partner / spouse route','Assess Appendix FM partner route where sponsor status, genuine/subsisting relationship, financial, accommodation, English and suitability requirements can be evidenced. If overstaying or unlawful entry exists, exceptional circumstances and Article 8 need careful review.');
- if(fam.includes('britishChild')||fam.includes('sevenYearChild')||fam.includes('otherChild'))add(r,'watch','R8 Parent / child route','Assess parent route only where parental responsibility/contact and child eligibility requirements are met. If a partner route is available, check whether parent route is excluded or not the correct route. Best interests and reasonableness must be evidenced.');
- if(answers.lawfulYears==='10plus')add(r,'good','R10 10-year lawful long residence ILR','Assess only with 10 years continuous lawful residence, no disqualifying gaps, current permission, absences calculated, and suitability, English and Life in the UK checked.');
- if(answers.totalYears==='20plus')add(r,'watch','R9 Private life / long residence outside 10-year lawful route','Assess Appendix Private Life separately where long residence includes unlawful periods. This is not automatic ILR and depends on age, length of residence, integration, suitability and evidence.');
- if(['R2','R16','R18'].includes(answers.status))add(r,'high','R2/R16/R18 Regularisation screening','No automatic application should be advised. Screen only for lawful family life, private life, asylum/protection, trafficking/modern slavery, domestic abuse, medical or exceptional circumstances routes supported by evidence.');
- if(answers.status==='R1')add(r,'watch','R1 Visitor restrictions','Visitors usually cannot switch into many long-term routes from inside the UK. Check if an out-of-country application is required unless a human rights/protection issue applies.');
- if(answers.status==='R11')add(r,'watch','R11 EUSS review','Check pre-settled vs settled status, continuous residence, absences, family member basis, upgrade eligibility and naturalisation suitability.');
- if(answers.status==='R12')add(r,'good','R12 Refugee / humanitarian protection settlement','Check settlement after the relevant protection period, criminality, revocation risk, travel to country of origin, absences and dependants.');
- if(answers.status==='R14'||answers.goal==='citizenship')add(r,'watch','R15 Naturalisation / citizenship','Assess residence, absences, lawful residence, immigration history, good character, English, Life in the UK and referees. Illegal entry, overstaying, deception and criminality must be checked against current nationality guidance.');
- if(answers.domesticBereaved==='domestic'||vuln.includes('domesticAbuse'))add(r,'high','R19 Domestic abuse concession / settlement screening','If the applicant was on a qualifying partner route and relationship broke down due to domestic abuse, assess DDVC/Migrant Victims of Domestic Abuse Concession and settlement rules.');
- if(answers.domesticBereaved==='bereaved')add(r,'watch','R19 Bereaved partner route','If the sponsoring partner died and the applicant held qualifying partner leave, assess bereaved partner settlement requirements.');
- if(vuln.includes('trafficking')||vuln.includes('safeguarding'))add(r,'high','R20 Safeguarding / trafficking review','Modern slavery, trafficking, child safeguarding or adult safeguarding issues require urgent specialist assessment and may change the correct route.');
- if(!r.length)add(r,'watch','Further adviser assessment needed','The answers do not identify a safe route automatically. Review documents and full immigration chronology before advising.');
- if(riskCountry)risk.push('Conflict/protection country flag: individual risk still needs evidence; nationality alone is not enough.');
- if(answers.safeRelocation==='yes')risk.push('Internal relocation may weaken an asylum/protection claim if safe and reasonable.');
- if(answers.entryLawful==='no')risk.push('Illegal/unlawful entry must be considered for suitability and citizenship good character, but does not by itself prevent protection screening.');
- if(answers.absences&&answers.absences!=='no')risk.push('Absences must be calculated before ILR or citizenship advice.');
- if(suit.includes('deception'))risk.push('Deception/false document allegation is a serious suitability issue.');
- if(suit.includes('criminal'))risk.push('Criminality or pending charges can affect suitability, deportation risk, ILR and citizenship.');
- if(suit.includes('removal'))risk.push('Removal/deportation/exclusion history needs specialist review.');
- if(suit.includes('publicFunds'))risk.push('Public funds issue needs review where leave had NRPF.');
- if(suit.includes('refusal'))risk.push('Previous refusals/appeals must be checked before route selection.');
- if(answers.hasJobOffer==='no')risk.push('No sponsored-work route should be suggested unless a licensed sponsor/job offer exists.');
- if(['R3','R4'].includes(answers.status)&&answers.hasSponsorNow==='no')risk.push('Current worker route needs urgent review because user says they are not currently sponsored.');
- if(['R3','R4'].includes(answers.status)&&answers.hasSponsorNow==='yes')ev.add('Certificate of Sponsorship, sponsor licence details, job description, payslips and contract');
- if(answers.hasJobOffer==='yes')ev.add('Job offer, sponsor licence details, draft CoS, salary and occupation-code evidence');
- if(fam.some(x=>x.includes('Partner')))ev.add('Relationship evidence, sponsor status, financial and accommodation evidence');
- if(fam.some(x=>x.includes('Child')))ev.add('Child birth certificate, passport/status, school/GP evidence and parental responsibility/contact evidence');
- if(answers.fearReturn==='yes'||answers.fearReturn==='unsure'||riskCountry)ev.add('Personal risk statement and country/background evidence');
- if(suit.includes('refusal'))ev.add('All refusal letters, appeal documents and tribunal decisions');
- if(suit.includes('criminal'))ev.add('DBS/police/court/sentencing records');
- if(vuln.some(x=>x!=='none'))ev.add('Safeguarding, medical, domestic abuse, trafficking or support organisation evidence');
- document.getElementById('routeBox').innerHTML=r.join('')+(risk.length?`<div class="risk"><h3>Red flags requiring adviser review</h3><ul>${risk.map(x=>`<li>${x}</li>`).join('')}</ul></div>`:'');
- document.getElementById('evidenceBox').innerHTML=`<ul>${[...ev].map(x=>`<li>${x}</li>`).join('')}</ul>`;
- document.getElementById('codeBox').innerHTML=`<table class="summary"><tbody>${Object.entries(ROUTES).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</tbody></table>`}
-function esc(s){return String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
+
+function shown(q){
+  return !q.show || q.show(answers);
+}
+
+function refresh(){
+  visible = Q.filter(shown);
+}
+
+function renderSteps(){
+  const active = visible[idx]?.s || 0;
+
+  document.getElementById('steps').innerHTML = sections.map((s,n)=>
+    `<div class="step ${n===active?'active':''}"><div class="bubble">${n+1}</div>${s}</div>`
+  ).join('');
+
+  document.getElementById('sectionName').textContent = sections[active];
+
+  const pct = Math.round((idx / Math.max(visible.length - 1, 1)) * 100);
+  document.getElementById('bar').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
+
+  document.getElementById('sideRows').innerHTML = sections.map((s,n)=>
+    `<div class="checkrow ${n<active?'done':''}"><span>${s}</span><span>${n<active?'✓':'○'}</span></div>`
+  ).join('');
+}
+
+function render(){
+  refresh();
+
+  if(idx >= visible.length) idx = visible.length - 1;
+
+  const q = visible[idx];
+  renderSteps();
+
+  document.getElementById('backBtn').style.display = idx ? 'inline-block' : 'none';
+
+  let h = `<label>${q.label}</label>${q.hint ? `<div class="hint">${q.hint}</div>` : ''}`;
+
+  if(['text','date'].includes(q.type)){
+    h += `<input id="${q.id}" type="${q.type}" value="${answers[q.id] || ''}">`;
+  }
+
+  if(q.type === 'textarea'){
+    h += `<textarea id="${q.id}">${answers[q.id] || ''}</textarea>`;
+  }
+
+  if(q.type === 'country'){
+    h += `<select id="${q.id}"><option value="">Select country</option>${countries.map(c=>`<option ${answers[q.id]===c?'selected':''}>${c}</option>`).join('')}</select>`;
+  }
+
+  if(q.type === 'select'){
+    h += `<select id="${q.id}"><option value="">Select one</option>${q.options.map(o=>`<option value="${o[0]}" ${answers[q.id]===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>`;
+  }
+
+  if(q.type === 'radio'){
+    h += `<div class="option-grid">${q.options.map(o=>`
+      <div class="option">
+        <input type="radio" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${answers[q.id]===o[0]?'checked':''}>
+        <label for="${q.id}_${o[0]}">${o[1]}</label>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  if(q.type === 'checkbox'){
+    const vals = answers[q.id] || [];
+    h += `<div class="option-grid">${q.options.map(o=>`
+      <div class="option">
+        <input type="checkbox" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${vals.includes(o[0])?'checked':''}>
+        <label for="${q.id}_${o[0]}">${o[1]}</label>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  if(q.type === 'cards'){
+    h += `<div class="option-grid">${q.options.map(o=>`
+      <div class="option">
+        <input type="radio" name="${q.id}" id="${q.id}_${o[0]}" value="${o[0]}" ${answers[q.id]===o[0]?'checked':''}>
+        <label for="${q.id}_${o[0]}">${o[1]}<small>${o[2] || ''}</small></label>
+      </div>
+    `).join('')}</div>`;
+  }
+
+  document.getElementById('questionBox').innerHTML = h;
+}
+
+function save(){
+  const q = visible[idx];
+  let v = '';
+
+  if(['radio','cards'].includes(q.type)){
+    const el = document.querySelector(`input[name="${q.id}"]:checked`);
+    v = el ? el.value : '';
+  } else if(q.type === 'checkbox'){
+    v = [...document.querySelectorAll(`input[name="${q.id}"]:checked`)].map(x=>x.value);
+  } else {
+    const el = document.getElementById(q.id);
+    v = el ? el.value.trim() : '';
+  }
+
+  if(!q.optional && ((Array.isArray(v) && !v.length) || (!Array.isArray(v) && !v))){
+    alert('Please answer this question.');
+    return false;
+  }
+
+  answers[q.id] = v;
+  clean(q.id);
+  return true;
+}
+
+function clean(id){
+  if(id === 'status'){
+    delete answers.hasSponsorNow;
+    delete answers.hasJobOffer;
+    delete answers.salaryOccupationOk;
+    delete answers.courseComplete;
+    delete answers.eussType;
+  }
+
+  if(id === 'hasSponsorNow' && answers.hasSponsorNow !== 'yes'){
+    delete answers.salaryOccupationOk;
+  }
+
+  if(id === 'hasJobOffer' && answers.hasJobOffer !== 'yes'){
+    delete answers.salaryOccupationOk;
+  }
+
+  if(id === 'family' && (answers.family || []).includes('none')){
+    answers.family = ['none'];
+    delete answers.relationshipEvidence;
+    delete answers.partnerRouteAvailable;
+    delete answers.domesticBereaved;
+  }
+
+  if(id === 'fearReturn' && !['yes','unsure'].includes(answers.fearReturn)){
+    delete answers.fearReason;
+    delete answers.safeRelocation;
+  }
+}
+
+function goNext(){
+  if(!save()) return;
+
+  refresh();
+
+  if(idx < visible.length - 1){
+    idx++;
+    render();
+  } else {
+    showResults();
+  }
+}
+
+function goBack(){
+  save();
+
+  if(idx > 0){
+    idx--;
+    render();
+  }
+}
+
+function restart(){
+  answers = {};
+  idx = 0;
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('start').classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+function label(id,val){
+  const q = Q.find(x=>x.id === id);
+
+  if(!q) return val;
+
+  if(Array.isArray(val)){
+    return val.map(v=>label(id,v)).join(', ');
+  }
+
+  if(q.type === 'country') return val;
+
+  const o = q.options?.find(x=>x[0] === val);
+  return o ? o[1] : val;
+}
+
+function add(list,cls,title,body){
+  list.push(`<div class="result ${cls}"><h3>${title}</h3><p>${body}</p></div>`);
+}
+
+function showResults(){
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+
+  document.getElementById('dateDone').textContent = new Date().toLocaleDateString('en-GB',{
+    day:'numeric',
+    month:'long',
+    year:'numeric'
+  });
+
+  let h = '<tbody>';
+
+  visible.forEach(q=>{
+    const v = label(q.id, answers[q.id]);
+    if(v) h += `<tr><th>${esc(q.label)}</th><td>${esc(v)}</td></tr>`;
+  });
+
+  document.getElementById('answerTable').innerHTML = h + '</tbody>';
+
+  logic();
+  window.scrollTo(0,0);
+}
+
+function logic(){
+  const r = [];
+  const risk = [];
+  const ev = new Set([
+    'Passport(s) and travel documents',
+    'BRP, eVisa, share code or status evidence',
+    'All Home Office letters and emails',
+    'Full immigration timeline',
+    'Proof of address history',
+    'Travel and absence list'
+  ]);
+
+  const fam = answers.family || [];
+  const suit = answers.suitability || [];
+  const vuln = answers.vulnerability || [];
+  const riskCountry = conflictCountries.includes(answers.nationality) || conflictCountries.includes(answers.birthCountry);
+
+  if((answers.fearReturn === 'yes' || answers.fearReturn === 'unsure' || riskCountry) && answers.location === 'uk'){
+    add(r,'high','R13 Asylum / protection assessment',
+      'Assess only where there is a fear of persecution or serious harm on return, no safe internal relocation, and evidence supports protection grounds. Unlawful entry does not automatically prevent claiming asylum, but credibility, delay and safe third-country issues need review.'
+    );
+  }
+
+  if((answers.fearReturn === 'yes' || answers.fearReturn === 'unsure') && answers.location === 'outside'){
+    add(r,'watch','R17 Protection concern outside the UK',
+      'A UK asylum claim is normally made from within the UK. Consider lawful entry-clearance routes, family reunion where available, resettlement or special schemes where applicable, or urgent specialist advice.'
+    );
+  }
+
+  if((['R3','R4'].includes(answers.status) && answers.hasSponsorNow === 'yes') || answers.hasJobOffer === 'yes'){
+    add(r,answers.salaryOccupationOk === 'yes' ? 'good' : 'watch','R3/R4 Sponsored work route',
+      'Assess only if there is a licensed sponsor, valid Certificate of Sponsorship, genuine vacancy, eligible occupation code, salary compliance, English language and suitability. If there is no sponsor or job offer, do not suggest this route.'
+    );
+  }
+
+  if(['R3','R4'].includes(answers.status) && answers.hasSponsorNow !== 'yes'){
+    risk.push('Current worker category selected, but no confirmed current sponsor. Do not assess extension or ILR under sponsored work until sponsorship is confirmed.');
+  }
+
+  if(answers.status === 'R5'){
+    add(r,'watch','R5 Student route planning',
+      'Assess extension, Graduate route after successful course completion, or switch to Skilled Worker only if sponsorship exists. Check switching restrictions before any in-country application.'
+    );
+  }
+
+  if(answers.status === 'R6'){
+    add(r,'watch','R6 Graduate route planning',
+      'Graduate leave is temporary and does not itself lead directly to settlement. Plan a settlement-leading route before expiry, usually Skilled Worker or a qualifying family route.'
+    );
+  }
+
+  if(fam.includes('britishPartner') || fam.includes('settledPartner') || fam.includes('protectionPartner')){
+    add(r,'good','R7 Partner / spouse route',
+      'Assess Appendix FM partner route where sponsor status, genuine relationship, financial, accommodation, English and suitability requirements can be evidenced. If overstaying or unlawful entry exists, exceptional circumstances and Article 8 need careful review.'
+    );
+  }
+
+  if(fam.includes('britishChild') || fam.includes('sevenYearChild') || fam.includes('otherChild')){
+    add(r,'watch','R8 Parent / child route',
+      'Assess parent route only where parental responsibility, direct contact and child eligibility requirements are met. If a partner route is available, check whether the parent route is the correct route. Best interests and reasonableness must be evidenced.'
+    );
+  }
+
+  if(answers.lawfulYears === '10plus'){
+    add(r,'good','R10 10-year lawful long residence ILR',
+      'Assess only with 10 years continuous lawful residence, no disqualifying gaps, current permission, absences calculated, and suitability, English and Life in the UK checked.'
+    );
+  }
+
+  if(answers.totalYears === '20plus'){
+    add(r,'watch','R9 Private life / long residence outside 10-year lawful route',
+      'Assess Appendix Private Life separately where long residence includes unlawful periods. This is not automatic ILR and depends on age, length of residence, integration, suitability and evidence.'
+    );
+  }
+
+  if(['R2','R16','R18'].includes(answers.status)){
+    add(r,'high','R2/R16/R18 Regularisation screening',
+      'No automatic application should be advised. Screen only for lawful family life, private life, asylum/protection, trafficking/modern slavery, domestic abuse, medical or exceptional circumstances routes supported by evidence.'
+    );
+  }
+
+  if(answers.status === 'R1'){
+    add(r,'watch','R1 Visitor restrictions',
+      'Visitors usually cannot switch into many long-term routes from inside the UK. Check if an out-of-country application is required unless a human rights or protection issue applies.'
+    );
+  }
+
+  if(answers.status === 'R11'){
+    add(r,'watch','R11 EU Settlement Scheme review',
+      'Check settled vs pre-settled status, continuous residence, absences, family member basis, upgrade eligibility and naturalisation suitability.'
+    );
+  }
+
+  if(answers.status === 'R12'){
+    add(r,'good','R12 Refugee / humanitarian protection settlement',
+      'Check settlement after the relevant protection period, criminality, revocation risk, travel to country of origin, absences and dependants.'
+    );
+  }
+
+  if(answers.status === 'R14' || answers.goal === 'citizenship'){
+    add(r,'watch','R15 Naturalisation / citizenship',
+      'Assess residence, absences, lawful residence, immigration history, good character, English, Life in the UK and referees. Illegal entry, overstaying, deception and criminality must be checked against current nationality guidance.'
+    );
+  }
+
+  if(answers.domesticBereaved === 'domestic' || vuln.includes('domesticAbuse')){
+    add(r,'high','R19 Domestic abuse concession / settlement screening',
+      'If the applicant was on a qualifying partner route and the relationship broke down due to domestic abuse, assess concession and settlement rules.'
+    );
+  }
+
+  if(answers.domesticBereaved === 'bereaved'){
+    add(r,'watch','R19 Bereaved partner route',
+      'If the sponsoring partner died and the applicant held qualifying partner leave, assess bereaved partner settlement requirements.'
+    );
+  }
+
+  if(vuln.includes('trafficking') || vuln.includes('safeguarding')){
+    add(r,'high','R20 Safeguarding / trafficking review',
+      'Modern slavery, trafficking, child safeguarding or adult safeguarding issues require urgent specialist assessment and may change the correct route.'
+    );
+  }
+
+  if(!r.length){
+    add(r,'watch','Further adviser assessment needed',
+      'The answers do not identify a safe route automatically. Review documents and full immigration chronology before advising.'
+    );
+  }
+
+  if(riskCountry) risk.push('Conflict/protection country flag: individual risk still needs evidence; nationality alone is not enough.');
+  if(answers.safeRelocation === 'yes') risk.push('Internal relocation may weaken an asylum/protection claim if safe and reasonable.');
+  if(answers.entryLawful === 'no') risk.push('Illegal or unlawful entry must be considered for suitability and citizenship good character, but does not by itself prevent protection screening.');
+  if(answers.absences && answers.absences !== 'no') risk.push('Absences must be calculated before ILR or citizenship advice.');
+  if(suit.includes('deception')) risk.push('Deception or false document allegation is a serious suitability issue.');
+  if(suit.includes('criminal')) risk.push('Criminality or pending charges can affect suitability, deportation risk, ILR and citizenship.');
+  if(suit.includes('removal')) risk.push('Removal, deportation or exclusion history needs specialist review.');
+  if(suit.includes('publicFunds')) risk.push('Public funds issue needs review where leave had NRPF.');
+  if(suit.includes('refusal')) risk.push('Previous refusals or appeals must be checked before route selection.');
+  if(answers.hasJobOffer === 'no') risk.push('No sponsored-work route should be suggested unless a licensed sponsor and genuine job offer exists.');
+
+  if((['R3','R4'].includes(answers.status) && answers.hasSponsorNow === 'yes') || answers.hasJobOffer === 'yes'){
+    ev.add('Certificate of Sponsorship, sponsor licence details, job description, payslips or contract and salary evidence');
+  }
+
+  if(fam.some(x=>x.includes('Partner'))){
+    ev.add('Relationship evidence, sponsor status, financial and accommodation evidence');
+  }
+
+  if(fam.some(x=>x.includes('Child'))){
+    ev.add('Child birth certificate, passport/status, school/GP evidence and parental responsibility/contact evidence');
+  }
+
+  if(answers.fearReturn === 'yes' || answers.fearReturn === 'unsure' || riskCountry){
+    ev.add('Personal risk statement and country/background evidence');
+  }
+
+  if(suit.includes('refusal')){
+    ev.add('All refusal letters, appeal documents and tribunal decisions');
+  }
+
+  if(suit.includes('criminal')){
+    ev.add('DBS, police, court or sentencing records');
+  }
+
+  if(vuln.some(x=>x !== 'none')){
+    ev.add('Safeguarding, medical, domestic abuse, trafficking or support organisation evidence');
+  }
+
+  document.getElementById('routeBox').innerHTML =
+    r.join('') +
+    (risk.length ? `<div class="risk"><h3>Red flags requiring adviser review</h3><ul>${risk.map(x=>`<li>${x}</li>`).join('')}</ul></div>` : '');
+
+  document.getElementById('evidenceBox').innerHTML =
+    `<ul>${[...ev].map(x=>`<li>${x}</li>`).join('')}</ul>`;
+
+  document.getElementById('codeBox').innerHTML =
+    `<table class="summary"><tbody>${Object.entries(ROUTES).map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</tbody></table>`;
+}
+
+function esc(s){
+  return String(s || '')
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'","&#039;");
+}
 </script>
 </body>
-</
+</html>
